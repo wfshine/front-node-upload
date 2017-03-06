@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5多图上传、压缩、剪裁插件</title>
+  <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="css/fileinput.css">
+
+</head>
+<body>
+<div class="container">
+  <div class="page-header">
+    <h1>HTML5多图上传、压缩、剪裁，后端服务器通过base64传输</h1>
+  </div>
+  <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">HTML5多图上传</h3>
+          </div>
+          <div class="box-body">
+            <div id="upload-container"></div>
+            <div id="upload-container2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <div class="row">
+      <div class="col-md-12">
+                <pre>
+      说明：基于bootstrap3与jquery2，实现的HTML5多图上传、压缩、剪裁，后端服务器通过base64传输
+      上传图片用法：
+        1、css：
+        <link rel="stylesheet" href="css/fileinput.css">
+        2、js:
+        <script src="js/lrz/dist/lrz.bundle.js"></script>
+        <script src="js/my-upload.js"></script>
+        3、图片上传初始化
+        /*
+        * @count: 一次可上传的图片数量
+        * @container:存放图片上传插件容器
+        * @width:压缩图片宽度
+        * @quality:压缩图片像素质量
+        * @crop:true|false 是否开启剪裁图片功能
+        * @uploadDir 上传图片的二级目录
+        * @compress:  控制是否开启压缩
+        * */
+        var myUpload=new myUpload({
+        container:'upload-container',
+        width:'800',
+        quality:'1',
+        crop:true,
+        count:20,
+        uploadDir:'uploadDir2',
+        compress:true
+        });
+        4、读取已存在图片列表方法：
+        /*
+        *@imgUrl 图片src
+        **/
+        myUpload.multipleShow([{ "imgUrl": "img/Koala.jpg" },{ "imgUrl": "img/Penguins.jpg" }])
+        5、获取当前已上传图片地址：
+        myUpload.getImagesList();
+        结果为：["图片url1","图片url2"]
+ </pre>
+
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="js/lrz/dist/lrz.bundle.js"></script>
+<script src="js/my-upload.js"></script>
+<script>
+  var myUpload = new uploadImg({
+    container: 'upload-container',
+    width: '800',
+    quality: '1',
+    crop: true,
+    count: 10,
+    uploadUrl: 'http://localhost:3001/upload',
+    uploadDir: 'uploadDir2',
+    compress: true
+  });
+  /*
+   * @count: 一次可上传的图片数量
+   * @container:存放图片上传插件容器
+   * @width:压缩图片宽度
+   * @quality:压缩图片像素质量
+   * @crop:true|false 是否开启剪衣图片功能
+   * @uploadUrl 上传服务器的URL地址
+   * @uploadDir 上传图片的二级目录
+   * @compress: 控制是否开启压缩
+   * */
+
+
+  var myUpload2 = new uploadImg({
+    container: 'upload-container2',
+    width: '800',
+    quality: '1',
+    crop: true,
+    count: 1,
+    uploadUrl: 'http://localhost:3001/upload',
+    uploadDir: 'uploadDir3',
+    compress: false
+  });
+
+  /*读取已存在图片列表*/
+  myUpload.multipleShow([{
+    "imgUrl": "img/Koala.jpg"
+  }, {
+    "imgUrl": "img/Penguins.jpg"
+  }]);
+  console.log(myUpload.getImagesList());
+</script>
+</html>
